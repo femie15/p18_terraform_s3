@@ -9,6 +9,7 @@ variable "ami-jfrog" {
     type = string
     description = "ami for jfrob"
 }
+
 variable "ami-sonar" {
     type = string
     description = "ami foir sonar"

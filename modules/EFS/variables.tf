@@ -12,6 +12,7 @@ variable "efs-sg" {
 
 }
 
+
 variable "account_no" {
   type        = string
   description = "account number for the aws"

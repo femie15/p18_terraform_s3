@@ -8,7 +8,6 @@ variable "instance_profile" {
   description = "Instance profile for launch template"
 }
 
-
 variable "keypair" {
   type        = string
   description = "Keypair for instances"

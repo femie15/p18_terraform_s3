@@ -10,6 +10,7 @@ variable "db-password" {
   description = "Master password"
 }
 
+
 variable "db-sg" {
   type = list
   description = "The DB security group"

@@ -12,7 +12,6 @@ variable "public-sbn-2" {
   description = "Public subnets to deploy external  ALB"
 }
 
-
 variable "vpc_id" {
   type        = string
   description = "The vpc ID"
