@@ -1,19 +1,19 @@
 # The entire section create a certiface, public zone, and validate the certificate using DNS method
 
 # Create the certificate using a wildcard for all the domains created in ccchf.ml
-resource "aws_acm_certificate" "ccchf" {
+resource "aws_acm_certificate" "project_19_cert" {
   domain_name       = "*.ccchf.ml"
   validation_method = "DNS"
 }
 
 # calling the hosted zone
-data "aws_route53_zone" "ccchf" {
+data "aws_route53_zone" "project_19_zone" {
   name         = "ccchf.ml"
   private_zone = false
 }
 
 # selecting validation method
-resource "aws_route53_record" "ccchf" {
+resource "aws_route53_record" "project_19_record" {
   for_each = {
     for dvo in aws_acm_certificate.project_19_cert.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
@@ -29,9 +29,9 @@ resource "aws_route53_record" "ccchf" {
   type            = each.value.type
   zone_id         = data.aws_route53_zone.project_19_zone.zone_id
 }
-
+ 
 # validate the certificate through DNS method
-resource "aws_acm_certificate_validation" "ccchf" {
+resource "aws_acm_certificate_validation" "project_19_validation" {
   certificate_arn         = aws_acm_certificate.project_19_cert.arn
   validation_record_fqdns = [for record in aws_route53_record.project_19_record : record.fqdn]
 }
