@@ -1,4 +1,5 @@
 # create key from key management system
+#   "Principal": { "AWS": "arn:aws:iam::${var.account_no}:user/femie15" },
 resource "aws_kms_key" "ACS-kms" {
   description = "KMS key "
   policy      = <<EOF
@@ -9,7 +10,7 @@ resource "aws_kms_key" "ACS-kms" {
     {
       "Sid": "Enable IAM User Permissions",
       "Effect": "Allow",
-      "Principal": { "AWS": "arn:aws:iam::${var.account_no}:user/femie15" },
+      "Principal": { "AWS": "arn:aws:iam::378701393220:user/femie15" },
       "Action": "kms:*",
       "Resource": "*"
     }
