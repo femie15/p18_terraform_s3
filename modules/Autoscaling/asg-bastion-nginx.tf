@@ -5,7 +5,7 @@ data "aws_availability_zones" "available" {
 
 
 # creating sns topic for all the auto scaling groups
-resource "aws_sns_topic" "BROWT-sns" {
+resource "aws_sns_topic" "ACS-sns" {
   name = "Default_CloudWatch_Alarms_Topic"
 }
 
@@ -25,7 +25,7 @@ resource "aws_autoscaling_notification" "femie_notifications" {
     "autoscaling:EC2_INSTANCE_TERMINATE_ERROR",
   ]
 
-  topic_arn = aws_sns_topic.BROWT-sns.arn
+  topic_arn = aws_sns_topic.ACS-sns.arn
 }
 
 
@@ -56,7 +56,7 @@ resource "aws_autoscaling_group" "bastion-asg" {
   }
   tag {
     key                 = "Name"
-    value               = "BROWT-bastion"
+    value               = "ACS-bastion"
     propagate_at_launch = true
   }
 
@@ -84,7 +84,7 @@ resource "aws_autoscaling_group" "nginx-asg" {
 
   tag {
     key                 = "Name"
-    value               = "BROWT-nginx"
+    value               = "ACS-nginx"
     propagate_at_launch = true
   }
 
@@ -94,6 +94,6 @@ resource "aws_autoscaling_group" "nginx-asg" {
  # attaching autoscaling group of nginx to external load balancer
 resource "aws_autoscaling_attachment" "asg_attachment_nginx" {
   autoscaling_group_name = aws_autoscaling_group.nginx-asg.id
-  lb_target_group_arn   = var.nginx-alb-tgt
+  alb_target_group_arn   = var.nginx-alb-tgt
 }
 

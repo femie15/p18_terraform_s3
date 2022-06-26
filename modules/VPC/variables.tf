@@ -46,7 +46,7 @@ variable "tags" {
 
 variable "name" {
   type    = string
-  default = "BROWT"
+  default = "ACS"
 
 }
 variable "environment" {

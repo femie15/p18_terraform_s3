@@ -17,16 +17,16 @@ resource "aws_autoscaling_group" "wordpress-asg" {
   }
   tag {
     key                 = "Name"
-    value               = "BROWT-wordpress"
+    value               = "ACS-wordpress"
     propagate_at_launch = true
   }
 }
 
 
-# attaching autoscaling group of  wordpress application to internal loadbalancer
+# # attaching autoscaling group of  wordpress application to internal loadbalancer
 resource "aws_autoscaling_attachment" "asg_attachment_wordpress" {
   autoscaling_group_name = aws_autoscaling_group.wordpress-asg.id
-  lb_target_group_arn   = var.wordpress-alb-tgt
+  alb_target_group_arn   = var.wordpress-alb-tgt
 }
 
 
@@ -49,7 +49,7 @@ resource "aws_autoscaling_group" "tooling-asg" {
 
   tag {
     key                 = "Name"
-    value               = "BROWT-tooling"
+    value               = "ACS-tooling"
     propagate_at_launch = true
   }
 }
@@ -57,5 +57,5 @@ resource "aws_autoscaling_group" "tooling-asg" {
 # # # attaching autoscaling group of  tooling application to internal loadbalancer
 resource "aws_autoscaling_attachment" "asg_attachment_tooling" {
   autoscaling_group_name = aws_autoscaling_group.tooling-asg.id
-  lb_target_group_arn   = var.tooling-alb-tgt
+  alb_target_group_arn   = var.tooling-alb-tgt
 }
